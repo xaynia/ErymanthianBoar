@@ -164,7 +164,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -9.018623, y: 1.5027971}
+  m_Offset: {x: -8.999884, y: 1.4973621}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -174,7 +174,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 21.037949, y: 3.019187}
+  m_Size: {x: 20.999767, y: 3.008317}
   m_EdgeRadius: 0
 --- !u!114 &2334436825910300187
 MonoBehaviour:
@@ -189,7 +189,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ground
   groundPrefab: {fileID: 2066976328218658299}
-  speed: 5
+  segmentWidth: 21
+  spawnNextAtX: 9
+  destroyAtX: -21
 --- !u!1 &2289196322433605836
 GameObject:
   m_ObjectHideFlags: 0

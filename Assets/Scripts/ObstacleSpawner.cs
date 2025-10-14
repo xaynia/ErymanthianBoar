@@ -1,34 +1,39 @@
+using System.Collections;
 using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-    public GameObject cactusA;
-    // ...
-    
-    public float minTimeBetweenSpawns;
-    public float maxTimeBetweenSpawns;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Header("Obstacle Set")]
+    public GameObject[] obstaclePrefabs;
+
+    private void Start()
     {
-        SpawnObstacle();
+        StartCoroutine(SpawnLoop());
     }
 
-    // Update is called once per frame
-    void SpawnObstacle()
+    private IEnumerator SpawnLoop()
     {
-        Instantiate(ChooseRandomObstacle(), transform.position, Quaternion.identity);
-        Invoke("SpawnObstacle", Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns));
-    }
+        // Small initial delay so the player sees the scene
+        yield return new WaitForSeconds(0.8f);
 
-    GameObject ChooseRandomObstacle()
-    {
-        int random = Random.Range(0, 1);
-        switch (random) 
+        while (true)
         {
-            case 0: return cactusA;
-            // ....
+            // Spawn one
+            Instantiate(ChooseRandomObstacle(), transform.position, Quaternion.identity);
+
+            // Wait based on dynamic difficulty
+            float minT = GameManager.Instance.CurrentSpawnMin;
+            float maxT = GameManager.Instance.CurrentSpawnMax;
+            float wait = Random.Range(minT, maxT);
+            yield return new WaitForSeconds(wait);
         }
-        return cactusA;
+        // ReSharper disable once IteratorNeverReturns
+    }
+
+    private GameObject ChooseRandomObstacle()
+    {
+        if (obstaclePrefabs == null || obstaclePrefabs.Length == 0) return null;
+        int idx = Random.Range(0, obstaclePrefabs.Length); // max is exclusive
+        return obstaclePrefabs[idx];
     }
 }

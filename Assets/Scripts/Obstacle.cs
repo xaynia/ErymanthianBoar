@@ -2,20 +2,21 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    public float speed;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Tooltip("Multiply global scroll speed for this obstacle (1 = same as ground).")]
+    public float speedMultiplier = 1f;
+
+    private void Start()
     {
-        Invoke("DestroyAfterTime", 10);
+        Invoke(nameof(DestroyAfterTime), 10f);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
+        float s = GameManager.Instance.ScrollSpeed * speedMultiplier;
+        transform.Translate(Vector3.left * (s * Time.deltaTime));
     }
 
-    void DestroyAfterTime()
+    private void DestroyAfterTime()
     {
         Destroy(gameObject);
     }

@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 1951022387779365403}
   - component: {fileID: 4592970460637637469}
   - component: {fileID: 2511905515988557360}
-  - component: {fileID: 5056364962384014207}
+  - component: {fileID: 8128362832963431853}
   - component: {fileID: 3433535762380258758}
+  - component: {fileID: 5056364962384014207}
   m_Layer: 0
   m_Name: Cactus A
   m_TagString: Damage
@@ -139,7 +140,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.63495183, y: 1.1903453}
   m_EdgeRadius: 0
---- !u!114 &5056364962384014207
+--- !u!114 &8128362832963431853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,10 +149,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4430073095208152531}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0abf6665093b4b7a85ab08ce126c49e, type: 3}
+  m_Script: {fileID: 11500000, guid: 86ac0c64c43ba451e8f5a95ce183ebff, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Obstacle
-  speed: 5
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreZone
+  destroyAfterScore: 1
 --- !u!61 &3433535762380258758
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -198,3 +199,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.091777325, y: 4.263323}
   m_EdgeRadius: 0
+--- !u!114 &5056364962384014207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4430073095208152531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0abf6665093b4b7a85ab08ce126c49e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Obstacle
+  speedMultiplier: 1
