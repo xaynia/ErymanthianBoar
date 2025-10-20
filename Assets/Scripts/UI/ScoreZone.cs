@@ -3,7 +3,7 @@ using UnityEngine;
 public class ScoreZone : MonoBehaviour
 {
     [Tooltip("If true, this trigger destroys itself after awarding score once.")]
-    public bool destroyAfterScore = true;
+    private bool destroyAfterScore = false;
 
     private bool consumed;
 

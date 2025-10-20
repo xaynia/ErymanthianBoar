@@ -7,7 +7,7 @@ public class Obstacle : MonoBehaviour
 
     private void Start()
     {
-        Invoke(nameof(DestroyAfterTime), 10f);
+        Invoke(nameof(DestroyAfterTime), 8f);
     }
 
     private void Update()
