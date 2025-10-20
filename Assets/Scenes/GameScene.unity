@@ -549,9 +549,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   menuSceneName: MenuScene
   baseScrollSpeed: 5
-  sprintSpeedMultiplier: 0.5
+  sprintSpeedMultiplier: 1.05
   distance01: 0.3
-  sprintGainPerSecond: 0.3
+  sprintGainPerSecond: 0.27
   passiveLossPerSecond: 0.15
   knockbackOnHit: 0.25
   winThreshold: 1
@@ -1231,9 +1231,9 @@ MonoBehaviour:
   jumpClip: {fileID: 8300000, guid: 569c7abd72daa4512b326942130ba21f, type: 3}
   landClip: {fileID: 8300000, guid: a8fc8aa3b8a47a64eb48bee46c9847dc, type: 3}
   hitClip: {fileID: 8300000, guid: 748bfaff907ecaa4b9ead1b20071465f, type: 3}
-  staminaMax: 100
+  staminaMax: 60
   sprintDrainPerSecond: 35
-  staminaRegenPerSecond: 16
+  staminaRegenPerSecond: 30
   sprintKey: 304
   allowLeftMouseSprint: 1
   holdSpaceToSprint: 0
