@@ -1254,8 +1254,8 @@ MonoBehaviour:
   landClip: {fileID: 8300000, guid: a8fc8aa3b8a47a64eb48bee46c9847dc, type: 3}
   hitClip: {fileID: 8300000, guid: 748bfaff907ecaa4b9ead1b20071465f, type: 3}
   staminaMax: 60
-  sprintDrainPerSecond: 30
-  staminaRegenPerSecond: 35
+  sprintDrainPerSecond: 35
+  staminaRegenPerSecond: 30
   sprintKey: 304
   allowLeftMouseSprint: 1
   holdSpaceToSprint: 0
