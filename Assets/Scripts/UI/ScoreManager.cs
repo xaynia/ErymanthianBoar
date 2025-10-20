@@ -8,6 +8,8 @@ public class ScoreManager : MonoBehaviour
     [Header("UI")]
     public TextMeshProUGUI scoreText;
 
+    public MenuReason nextMenuReason = MenuReason.Title;
+        
     public int Score { get; private set; }
 
     private void Awake()

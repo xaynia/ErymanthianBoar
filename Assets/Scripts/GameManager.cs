@@ -6,8 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     
     [Header("Scenes")]
-    public string menuSceneName = "MenuScene";
-    public string gameplaySceneName = "GameScene";
+    public string menuSceneName = "Scenes/MenuScene";
 
     [Header("Scroll / Speed")]
     [Tooltip("Base world scroll speed (units/sec).")]
@@ -134,15 +133,21 @@ public class GameManager : MonoBehaviour
     {
         if (isLoading) return;
         isLoading = true;
+        
         ScoreManager.Instance?.SaveLastRunAndHighScore(true);
-        SceneManager.LoadScene("Scenes/MenuScene");
+        if (ScoreManager.Instance) ScoreManager.Instance.nextMenuReason = MenuReason.Victory;
+        
+        SceneManager.LoadScene(menuSceneName);
     }
 
     private void OnLose()
     {
         if (isLoading) return;
         isLoading = true;
+        
         ScoreManager.Instance?.SaveLastRunAndHighScore(false);
-        SceneManager.LoadScene("Scenes/MenuScene");
+        if (ScoreManager.Instance) ScoreManager.Instance.nextMenuReason = MenuReason.GameOver;
+        
+        SceneManager.LoadScene(menuSceneName);
     }
 }

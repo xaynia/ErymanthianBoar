@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoarChaseVisual
   farPos: {x: 11.75, y: -0.08, z: 0}
-  nearPos: {x: -2.4, y: -0.08, z: 0}
+  nearPos: {x: -3.25, y: -0.08, z: 0}
   smooth: 6
 --- !u!1 &252548712
 GameObject:
@@ -548,9 +548,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   menuSceneName: MenuScene
-  gameplaySceneName: GameScene
   baseScrollSpeed: 5
-  sprintSpeedMultiplier: 1.15
+  sprintSpeedMultiplier: 1.1
   distance01: 0.3
   sprintGainPerSecond: 0.3
   passiveLossPerSecond: 0.15
@@ -558,9 +557,9 @@ MonoBehaviour:
   winThreshold: 1
   loseThreshold: 0
   useBoarEndurance: 1
-  boarEnduranceMax: 100
-  boarBaseDrainPerSecond: 0.5
-  boarPressureDrainPerSecond: 2.5
+  boarEnduranceMax: 125
+  boarBaseDrainPerSecond: 0.25
+  boarPressureDrainPerSecond: 2
   pressureThreshold: 0.7
   rampDurationSeconds: 90
   spawnMinStart: 1.6
@@ -1233,8 +1232,8 @@ MonoBehaviour:
   landClip: {fileID: 8300000, guid: a8fc8aa3b8a47a64eb48bee46c9847dc, type: 3}
   hitClip: {fileID: 8300000, guid: 748bfaff907ecaa4b9ead1b20071465f, type: 3}
   staminaMax: 100
-  sprintDrainPerSecond: 30
-  staminaRegenPerSecond: 18
+  sprintDrainPerSecond: 35
+  staminaRegenPerSecond: 16
   sprintKey: 304
   allowLeftMouseSprint: 1
   holdSpaceToSprint: 0
@@ -2454,6 +2453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
   scoreText: {fileID: 1092492364}
+  nextMenuReason: 0
 --- !u!4 &1347959034
 Transform:
   m_ObjectHideFlags: 0
