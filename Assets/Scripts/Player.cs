@@ -9,9 +9,6 @@ public class Player : MonoBehaviour
     public LayerMask groundLayer;
     public float rayLength = 1.4f;
 
-    [Header("Scoring")]
-    public TextMeshProUGUI scoreText;
-
     [Header("Audio")]
     public AudioClip jumpClip;
     public AudioClip landClip;
@@ -46,7 +43,6 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         stamina = staminaMax;
-        UpdateScoreUI();
     }
 
     void Update()
@@ -128,16 +124,4 @@ public class Player : MonoBehaviour
             if (isGrounded && landClip) AudioManager.instance?.PlaySFX(landClip);
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Use a dedicated "Score" tag on a thin trigger placed just past each obstacle
-        if (collision.gameObject.CompareTag("Score"))
-        {
-            score++;
-            UpdateScoreUI();
-        }
-    }
-
-    private void UpdateScoreUI() => scoreText.text = score.ToString();
 }

@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 63128214}
   - component: {fileID: 63128213}
   m_Layer: 5
-  m_Name: Score Text (1)
+  m_Name: Stamina Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1227,13 +1227,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   rayLength: 1.4
-  scoreText: {fileID: 1092492364}
   jumpClip: {fileID: 8300000, guid: 569c7abd72daa4512b326942130ba21f, type: 3}
   landClip: {fileID: 8300000, guid: a8fc8aa3b8a47a64eb48bee46c9847dc, type: 3}
   hitClip: {fileID: 8300000, guid: 748bfaff907ecaa4b9ead1b20071465f, type: 3}
   staminaMax: 60
-  sprintDrainPerSecond: 35
-  staminaRegenPerSecond: 30
+  sprintDrainPerSecond: 30
+  staminaRegenPerSecond: 35
   sprintKey: 304
   allowLeftMouseSprint: 1
   holdSpaceToSprint: 0
@@ -1817,6 +1816,7 @@ GameObject:
   - component: {fileID: 1092492363}
   - component: {fileID: 1092492365}
   - component: {fileID: 1092492364}
+  - component: {fileID: 1092492366}
   m_Layer: 5
   m_Name: Score Text
   m_TagString: Untagged
@@ -1942,6 +1942,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1092492362}
   m_CullTransparentMesh: 1
+--- !u!114 &1092492366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092492362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9dabc21e434e6a977395d1a13bf5ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreHUD
+  text: {fileID: 1092492364}
+  format: '{0}'
 --- !u!1 &1171758038
 GameObject:
   m_ObjectHideFlags: 0
@@ -2452,7 +2466,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc8e568b45534119b688dc4d5e1c6f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
-  scoreText: {fileID: 1092492364}
   nextMenuReason: 0
 --- !u!4 &1347959034
 Transform:

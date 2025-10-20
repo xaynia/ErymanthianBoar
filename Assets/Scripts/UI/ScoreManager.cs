@@ -5,9 +5,6 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
 
-    [Header("UI")]
-    public TextMeshProUGUI scoreText;
-
     public MenuReason nextMenuReason = MenuReason.Title;
         
     public int Score { get; private set; }
@@ -23,13 +20,11 @@ public class ScoreManager : MonoBehaviour
     public void ResetScore()
     {
         Score = 0;
-        UpdateUI();
     }
 
     public void Add(int amount = 1)
     {
         Score += amount;
-        UpdateUI();
     }
 
     public void SaveLastRunAndHighScore(bool won)
@@ -41,10 +36,5 @@ public class ScoreManager : MonoBehaviour
         if (Score > best) PlayerPrefs.SetInt("highScore", Score);
 
         PlayerPrefs.Save();
-    }
-
-    private void UpdateUI()
-    {
-        if (scoreText) scoreText.text = Score.ToString();
     }
 }
