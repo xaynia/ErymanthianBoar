@@ -340,7 +340,7 @@ Transform:
   m_GameObject: {fileID: 136086362}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.75, y: -0.08, z: 0}
+  m_LocalPosition: {x: 9.05, y: -0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -549,14 +549,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   menuSceneName: MenuScene
   baseScrollSpeed: 5
-  sprintSpeedMultiplier: 1.1
+  sprintSpeedMultiplier: 0.5
   distance01: 0.3
   sprintGainPerSecond: 0.3
   passiveLossPerSecond: 0.15
   knockbackOnHit: 0.25
   winThreshold: 1
   loseThreshold: 0
-  useBoarEndurance: 1
+  useBoarEndurance: 0
   boarEnduranceMax: 125
   boarBaseDrainPerSecond: 0.25
   boarPressureDrainPerSecond: 2
