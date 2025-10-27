@@ -28,12 +28,12 @@ public class MenuController : MonoBehaviour
         {
             case MenuReason.Title:
                 titleText.text    = "HERACLES & THE ERYMANTHIAN BOAR";
-                controlsText.text = "SPACE — Jump\nLEFT SHIFT — Sprint";
+                controlsText.text = "SPACE: Jump\nLEFT SHIFT/MOUSE: Sprint";
                 break;
 
             case MenuReason.GameOver:
                 titleText.text    = "Game Over";
-                controlsText.text = "SPACE — Jump | LEFT SHIFT — Sprint";
+                controlsText.text = "SPACE: Jump\nLEFT SHIFT/MOUSE: Sprint";
                 break;
 
             case MenuReason.Victory:

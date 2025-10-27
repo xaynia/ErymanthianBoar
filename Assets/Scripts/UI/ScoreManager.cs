@@ -6,7 +6,12 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance { get; private set; }
 
     public MenuReason nextMenuReason = MenuReason.Title;
-        
+    
+    // T REX SCORE STAGES
+    public static System.Action<int> ScoreChanged;
+    
+
+    // end t rex score stages (see game manager for the rest)
     public int Score { get; private set; }
 
     private void Awake()
@@ -25,6 +30,7 @@ public class ScoreManager : MonoBehaviour
     public void Add(int amount = 1)
     {
         Score += amount;
+        ScoreChanged?.Invoke(Score);
     }
 
     public void SaveLastRunAndHighScore(bool won)

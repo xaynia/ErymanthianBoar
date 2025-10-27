@@ -524,7 +524,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 11.240323, y: 1.5761757}
+  m_Offset: {x: 11.226797, y: 1.5761757}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -534,7 +534,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 21.027029, y: 2.9954863}
+  m_Size: {x: 21.001919, y: 2.9954863}
   m_EdgeRadius: 0
 --- !u!114 &229720317809777319
 MonoBehaviour:
@@ -551,7 +551,7 @@ MonoBehaviour:
   groundPrefab: {fileID: 7149624595940718603}
   segmentWidth: 21
   spawnNextAtX: 9
-  destroyAtX: -21
+  destroyAtX: -42
 --- !u!1 &8278899023056605319
 GameObject:
   m_ObjectHideFlags: 0

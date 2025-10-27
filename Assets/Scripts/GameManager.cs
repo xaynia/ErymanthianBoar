@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     
     [Header("Scenes")]
     public string menuSceneName = "Scenes/MenuScene";
+    public string winScene = "Scenes/WinScene";
 
     [Header("Scroll / Speed")]
     [Tooltip("Base world scroll speed (units/sec).")]
@@ -15,7 +16,7 @@ public class GameManager : MonoBehaviour
     public float sprintSpeedMultiplier = 1.25f;
 
     [Header("Chase (Distance)")]
-    [Range(0f, 1f)] public float distance01 = 0.3f; // start somewhat behind
+    [Range(0f, 1f)] public float distance01 = 0.1f; // start somewhat behind
     public float sprintGainPerSecond = 0.30f;
     public float passiveLossPerSecond = 0.15f;
     public float knockbackOnHit = 0.25f;     // how much distance you lose on collision
@@ -37,6 +38,16 @@ public class GameManager : MonoBehaviour
     public float spawnMaxStart = 2.4f;
     public float spawnMaxEnd = 1.0f;
     
+    [Header("Speed Ramp (world feel)")]
+    public float speedRampDuration = 90f;   // seconds to reach full speed
+    public float speedEndMultiplier = 1.50f; // world goes +30% by the end
+
+    
+    
+    [Header("Difficulty curve (0..1)")]
+    public AnimationCurve difficultyCurve = AnimationCurve.EaseInOut(0,0,1,1);
+
+    
     [Header("On-Hit Policy")]
     public bool instantLoseOnHit = true;  // set true for game over on hit
 
@@ -44,13 +55,45 @@ public class GameManager : MonoBehaviour
     private bool isSprinting;
     private float elapsed;
     private bool isLoading;
+    
+    // t rex changes start
+    [Header("T-Rex Steps (optional)")]
+    public int[] speedScoreSteps   = { 10, 20, 35, 55, 80 };
+    public float[] speedStepMults  = { 1.15f, 1.3f, 1.45f, 1.6f, 1.8f };
+
+    float stepMul = 1f;
+
+    void OnEnable()  { ScoreManager.ScoreChanged += OnScoreChanged; }
+    void OnDisable() { ScoreManager.ScoreChanged -= OnScoreChanged; }
+    void OnScoreChanged(int s)
+    {
+        stepMul = 1f;
+        for (int i = 0; i < speedScoreSteps.Length; i++)
+            if (s >= speedScoreSteps[i]) stepMul = speedStepMults[i];
+    }
+    // public float ScrollSpeed =>
+    //     baseScrollSpeed * stepMul * SpeedMul01 * (isSprinting ? sprintSpeedMultiplier : 1f);
+    // t rex changes end
+    
+    // Normalized difficulty based on elapsed time and your curve
+    public float Difficulty01 => 
+        difficultyCurve.Evaluate(Mathf.Clamp01(elapsed / rampDurationSeconds));
+    
+    // World-speed multiplier that grows over speedRampDuration
+    public float SpeedMul01   => 
+        Mathf.Lerp(1f, speedEndMultiplier, Mathf.Clamp01(elapsed / speedRampDuration));
+
 
     public float ScrollSpeed
     {
         get
         {
+            // float sprintMul = isSprinting ? sprintSpeedMultiplier : 1f;
+            // return baseScrollSpeed * sprintMul;
+            float worldMul = SpeedMul01;
             float sprintMul = isSprinting ? sprintSpeedMultiplier : 1f;
-            return baseScrollSpeed * sprintMul;
+            return baseScrollSpeed * worldMul * sprintMul;
+            
         }
     }
     
@@ -64,7 +107,9 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            float t = Mathf.Clamp01(elapsed / rampDurationSeconds);
+            // float t = Mathf.Clamp01(elapsed / rampDurationSeconds);
+            // return Mathf.Lerp(spawnMinStart, spawnMinEnd, t);
+            float t = Difficulty01;
             return Mathf.Lerp(spawnMinStart, spawnMinEnd, t);
         }
     }
@@ -73,7 +118,9 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            float t = Mathf.Clamp01(elapsed / rampDurationSeconds);
+            // float t = Mathf.Clamp01(elapsed / rampDurationSeconds);
+            // return Mathf.Lerp(spawnMaxStart, spawnMaxEnd, t);
+            float t = Difficulty01;
             return Mathf.Lerp(spawnMaxStart, spawnMaxEnd, t);
         }
     }
@@ -137,7 +184,7 @@ public class GameManager : MonoBehaviour
         ScoreManager.Instance?.SaveLastRunAndHighScore(true);
         if (ScoreManager.Instance) ScoreManager.Instance.nextMenuReason = MenuReason.Victory;
         
-        SceneManager.LoadScene(menuSceneName);
+        SceneManager.LoadScene(winScene);
     }
 
     private void OnLose()

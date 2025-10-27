@@ -265,8 +265,8 @@ GameObject:
   m_Component:
   - component: {fileID: 136086364}
   - component: {fileID: 136086363}
-  - component: {fileID: 136086365}
   - component: {fileID: 136086366}
+  - component: {fileID: 136086365}
   m_Layer: 0
   m_Name: Boar
   m_TagString: Untagged
@@ -341,7 +341,7 @@ Transform:
   m_GameObject: {fileID: 136086362}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9, y: -0.08, z: 0}
+  m_LocalPosition: {x: 6.1, y: -0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -354,13 +354,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136086362}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 640f16fac44f442fc8ddf0ec61bad1ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoarChaseVisual
-  farPos: {x: 11.75, y: -0.08, z: 0}
-  nearPos: {x: -4, y: -0.08, z: 0}
+  farX: 1
+  nearX: 0.92
   smooth: 6
 --- !u!95 &136086366
 Animator:
@@ -476,25 +476,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 229720317809777319, guid: 40f5e3586c99e4048b08c2108e34e927, type: 3}
-      propertyPath: destroyAtX
-      value: -42
-      objectReference: {fileID: 0}
-    - target: {fileID: 229720317809777319, guid: 40f5e3586c99e4048b08c2108e34e927, type: 3}
-      propertyPath: spawnNextAtX
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 7149624595940718603, guid: 40f5e3586c99e4048b08c2108e34e927, type: 3}
       propertyPath: m_Name
       value: Ground Snow (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7407162086856755367, guid: 40f5e3586c99e4048b08c2108e34e927, type: 3}
-      propertyPath: m_Size.x
-      value: 21.001919
-      objectReference: {fileID: 0}
-    - target: {fileID: 7407162086856755367, guid: 40f5e3586c99e4048b08c2108e34e927, type: 3}
-      propertyPath: m_Offset.x
-      value: 11.226797
       objectReference: {fileID: 0}
     - target: {fileID: 8782243215869933655, guid: 40f5e3586c99e4048b08c2108e34e927, type: 3}
       propertyPath: m_LocalPosition.x
@@ -571,24 +555,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   menuSceneName: MenuScene
+  winScene: WinScene
   baseScrollSpeed: 5
-  sprintSpeedMultiplier: 1.05
-  distance01: 0.3
-  sprintGainPerSecond: 0.27
-  passiveLossPerSecond: 0.15
+  sprintSpeedMultiplier: 2.25
+  distance01: 0.1
+  sprintGainPerSecond: 0.4
+  passiveLossPerSecond: 0.12
   knockbackOnHit: 0.25
-  winThreshold: 1
+  winThreshold: 0.85
   loseThreshold: 0
   useBoarEndurance: 0
   boarEnduranceMax: 125
   boarBaseDrainPerSecond: 0.25
   boarPressureDrainPerSecond: 2
   pressureThreshold: 0.7
-  rampDurationSeconds: 90
+  rampDurationSeconds: 45
   spawnMinStart: 1.6
   spawnMinEnd: 0.6
   spawnMaxStart: 2.4
   spawnMaxEnd: 1
+  speedRampDuration: 30
+  speedEndMultiplier: 1.5
+  difficultyCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   instantLoseOnHit: 1
 --- !u!4 &515166063
 Transform:
@@ -1126,11 +1137,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 660170470}
-  - component: {fileID: 660170469}
   - component: {fileID: 660170471}
-  - component: {fileID: 660170473}
-  - component: {fileID: 660170468}
+  - component: {fileID: 660170477}
+  - component: {fileID: 660170476}
+  - component: {fileID: 660170475}
   - component: {fileID: 660170472}
+  - component: {fileID: 660170473}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1138,7 +1150,126 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &660170468
+--- !u!4 &660170470
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660170467}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.915, y: -0.684, z: 0}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &660170471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660170467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1216550febb03451eb8b5069570f707f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
+  jumpForce: 9
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  rayLength: 1.4
+  coyoteTime: 0.08
+  jumpBufferTime: 0.1
+  extraFallPercent: 0
+  jumpClip: {fileID: 8300000, guid: 569c7abd72daa4512b326942130ba21f, type: 3}
+  landClip: {fileID: 8300000, guid: a8fc8aa3b8a47a64eb48bee46c9847dc, type: 3}
+  hitClip: {fileID: 8300000, guid: 748bfaff907ecaa4b9ead1b20071465f, type: 3}
+  staminaMax: 60
+  sprintDrainPerSecond: 35
+  staminaRegenPerSecond: 30
+  sprintKey: 304
+  allowLeftMouseSprint: 1
+  holdSpaceToSprint: 0
+  holdThreshold: 0.15
+  sprintInputWarmup: 0.25
+--- !u!50 &660170472
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660170467}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1.3789655
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 2
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!61 &660170473
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660170467}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.0025196373, y: 0.018501163}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.3333334, y: 2}
+    newSize: {x: 0.6666667, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.44958687, y: 1.9629977}
+  m_EdgeRadius: 0
+--- !u!95 &660170475
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -1160,7 +1291,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!212 &660170469
+--- !u!212 &660170476
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1218,22 +1349,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &660170470
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 660170467}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.21, y: -0.77, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &660170471
+--- !u!114 &660170477
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1242,97 +1358,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 660170467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1216550febb03451eb8b5069570f707f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5780246cca256482e8f1ded160160ab7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Player
-  jumpForce: 8.5
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  rayLength: 1.4
-  jumpClip: {fileID: 8300000, guid: 569c7abd72daa4512b326942130ba21f, type: 3}
-  landClip: {fileID: 8300000, guid: a8fc8aa3b8a47a64eb48bee46c9847dc, type: 3}
-  hitClip: {fileID: 8300000, guid: 748bfaff907ecaa4b9ead1b20071465f, type: 3}
-  staminaMax: 60
-  sprintDrainPerSecond: 35
-  staminaRegenPerSecond: 30
-  sprintKey: 304
-  allowLeftMouseSprint: 1
-  holdSpaceToSprint: 0
-  holdThreshold: 0.15
---- !u!50 &660170472
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 660170467}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 2
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &660170473
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 660170467}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.00251963, y: 0.06263679}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.3333334, y: 2}
-    newSize: {x: 0.6666667, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.44958687, y: 1.8747264}
-  m_EdgeRadius: 0
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerChaseViewport
+  farX: 0.1
+  nearX: 0.8
+  followTime: 0.18
+  maxXSpeed: 7
+  sprintNudge: 0.06
+  snapOnEnable: 1
+  player: {fileID: 660170471}
+  airNudge: 0.1003
 --- !u!1001 &892821403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2249,37 +2285,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1269006615
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1269006616}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1269006616
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1269006615}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.23538, y: 1.29613, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1307961713
 GameObject:
   m_ObjectHideFlags: 0
@@ -2672,37 +2677,6 @@ Transform:
   - {fileID: 2082062080}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1822348965
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1822348966}
-  m_Layer: 6
-  m_Name: Obstacles
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1822348966
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1822348965}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.83595, y: -2.00806, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1953163534
 GameObject:
   m_ObjectHideFlags: 0
@@ -3022,19 +2996,17 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 619394802}
+  - {fileID: 515166063}
   - {fileID: 660170470}
-  - {fileID: 1822348966}
   - {fileID: 252548714}
-  - {fileID: 1784915237}
   - {fileID: 1744158758}
   - {fileID: 931917210}
   - {fileID: 989464765}
   - {fileID: 2073310289}
   - {fileID: 428066241}
-  - {fileID: 136086364}
-  - {fileID: 515166063}
-  - {fileID: 1347959034}
-  - {fileID: 1269006616}
   - {fileID: 892821403}
+  - {fileID: 136086364}
+  - {fileID: 1347959034}
+  - {fileID: 1784915237}
   - {fileID: 1256353009}
+  - {fileID: 619394802}
