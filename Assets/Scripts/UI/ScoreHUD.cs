@@ -13,8 +13,15 @@ public class ScoreHUD : MonoBehaviour
     void LateUpdate()
     {
         if (!ScoreManager.Instance || !text) return;
+
+        if (!ScoreManager.Instance.Running)
+        {
+            text.text = ""; // hide when not in a run
+            return;
+        }
+
         float t = ScoreManager.Instance.TimeRemaining;
-        int cs = Mathf.FloorToInt((t * 100f) % 100f);   // centiseconds
+        int cs = Mathf.FloorToInt((t * 100f) % 100f);
         int s  = Mathf.FloorToInt(t) % 60;
         int m  = Mathf.FloorToInt(t / 60f);
         text.text = $"{m:00}:{s:00}.{cs:00}";

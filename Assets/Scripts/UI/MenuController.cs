@@ -8,7 +8,7 @@ public class MenuController : MonoBehaviour
     public TextMeshProUGUI titleText;      // e.g., "Herc vs The Boar"
     public TextMeshProUGUI lastScoreText;  // shows last score or 0
     public TextMeshProUGUI highScoreText;  // shows best
-    public TextMeshProUGUI controlsText;    // "SPACE — Jump | LEFT SHIFT — Sprint..."
+    public TextMeshProUGUI controlsText;    // "SPACE: Jump | LEFT SHIFT: Sprint..."
     
     [Header("Scenes")]
     public string gameSceneName = "Scenes/GameScene";
@@ -41,7 +41,7 @@ public class MenuController : MonoBehaviour
 
         int lastMs = PlayerPrefs.GetInt("lastTimeMs", -1);
         int bestMs = PlayerPrefs.GetInt("bestTimeMs", -1);
-
+        
         string F(int ms){
             if (ms < 0) return "--:--.--";
             int t = ms; int cs = (t/10)%100; t/=1000;

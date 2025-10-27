@@ -1,5 +1,5 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -8,19 +8,43 @@ public class ScoreManager : MonoBehaviour
     // NEW TIMER BASED SCORE LOGIC
     [Header("Countdown (seconds)")]
     public float countdownStart = 60f;
-
+    
+    [Header("Scene Names")]
+    public string menuScene = "MenuScene";
+    public string gameScene = "GameScene";
+    public string winScene  = "WinScene";
+    
     public float TimeRemaining { get; private set; }   // live timer
     public float TimeElapsed   { get; private set; }   // for “best time”
     public bool Running { get; private set; }
 
     public MenuReason nextMenuReason = MenuReason.Title;
 
-    void Awake()
+    private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
         ResetStats();
+    }
+
+    private void OnEnable()  { SceneManager.sceneLoaded += OnSceneLoaded; }
+    private void OnDisable() { SceneManager.sceneLoaded -= OnSceneLoaded; }
+
+    private void OnSceneLoaded(Scene s, LoadSceneMode _)
+    {
+        string n = s.name;
+
+        if (n == gameScene)
+        {
+            // Auto start the run whenever GameScene is entered.
+            StartRun();
+        }
+        else if (n == menuScene || n == winScene)
+        {
+            // Ensure timer is not running in Menu or Win scenes.
+            StopRun(false); // don't reset stats so the menu can read the last result
+        }
     }
 
     public void ResetStats()
@@ -29,11 +53,20 @@ public class ScoreManager : MonoBehaviour
         TimeElapsed   = 0f;
         Running       = false;
     }
+    
+    public void StartRun()
+    {
+        ResetStats();
+        Running = true;
+    }
+    
+    public void StopRun(bool reset = false)
+    {
+        Running = false;
+        if (reset) ResetStats();
+    }
 
-    public void StartRun()  { ResetStats(); Running = true; }
-    public void StopRun()   { Running = false; }
-
-    void Update()
+    private void Update()
     {
         if (!Running) return;
 
@@ -56,8 +89,15 @@ public class ScoreManager : MonoBehaviour
         PlayerPrefs.SetInt("lastResult", won ? 1 : 0);
 
         // best time: LOWER is better (only update on win)
-        int bestMs = PlayerPrefs.GetInt("bestTimeMs", int.MaxValue);
-        if (won && lastMs < bestMs) PlayerPrefs.SetInt("bestTimeMs", lastMs);
+        if (won && lastMs > 0)
+        {
+            int bestMs = PlayerPrefs.HasKey("bestTimeMs")
+                ? PlayerPrefs.GetInt("bestTimeMs")
+                : int.MaxValue;
+
+            if (lastMs < bestMs)
+                PlayerPrefs.SetInt("bestTimeMs", lastMs);
+        }
 
         PlayerPrefs.Save();
     }
