@@ -2,18 +2,21 @@ using UnityEngine;
 using TMPro;
 
 public class ScoreHUD : MonoBehaviour
+
+// COUNTDOWN LOGIC
+
 {
     public TextMeshProUGUI text;
-    public string format = "{0}";
 
-    void Reset()
-    {
-        text = GetComponent<TextMeshProUGUI>();
-    }
+    void Reset(){ text = GetComponent<TextMeshProUGUI>(); }
 
     void LateUpdate()
     {
-        int s = ScoreManager.Instance ? ScoreManager.Instance.Score : 0;
-        if (text) text.text = string.Format(format, s);
+        if (!ScoreManager.Instance || !text) return;
+        float t = ScoreManager.Instance.TimeRemaining;
+        int cs = Mathf.FloorToInt((t * 100f) % 100f);   // centiseconds
+        int s  = Mathf.FloorToInt(t) % 60;
+        int m  = Mathf.FloorToInt(t / 60f);
+        text.text = $"{m:00}:{s:00}.{cs:00}";
     }
 }

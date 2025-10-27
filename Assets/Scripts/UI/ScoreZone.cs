@@ -13,7 +13,6 @@ public class ScoreZone : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         consumed = true;
-        ScoreManager.Instance?.Add(1);
 
         if (destroyAfterScore) Destroy(gameObject);
     }

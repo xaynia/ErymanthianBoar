@@ -5,42 +5,59 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
 
+    // NEW TIMER BASED SCORE LOGIC
+    [Header("Countdown (seconds)")]
+    public float countdownStart = 60f;
+
+    public float TimeRemaining { get; private set; }   // live timer
+    public float TimeElapsed   { get; private set; }   // for “best time”
+    public bool Running { get; private set; }
+
     public MenuReason nextMenuReason = MenuReason.Title;
-    
-    // T REX SCORE STAGES
-    // public static System.Action<int> ScoreChanged;
-    //
 
-    // end t rex score stages (see game manager for the rest)
-    public int Score { get; private set; }
-
-    private void Awake()
+    void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        ResetScore();
+        ResetStats();
     }
 
-    public void ResetScore()
+    public void ResetStats()
     {
-        Score = 0;
+        TimeRemaining = countdownStart;
+        TimeElapsed   = 0f;
+        Running       = false;
     }
 
-    public void Add(int amount = 1)
+    public void StartRun()  { ResetStats(); Running = true; }
+    public void StopRun()   { Running = false; }
+
+    void Update()
     {
-        Score += amount;
-        // t rex change
-        // ScoreChanged?.Invoke(Score);
+        if (!Running) return;
+
+        TimeElapsed   += Time.deltaTime;
+        TimeRemaining  = Mathf.Max(0f, TimeRemaining - Time.deltaTime);
+
+        if (TimeRemaining <= 0f)
+        {
+            Running = false;
+            GameManager.Instance?.OnPlayerHitObstacle();   // treat as lose
+        }
     }
 
+    // Save times for the menu
     public void SaveLastRunAndHighScore(bool won)
     {
-        PlayerPrefs.SetInt("lastScore", Score);
+        // save last time (ms) for consistent formatting
+        int lastMs = Mathf.RoundToInt(TimeElapsed * 1000f);
+        PlayerPrefs.SetInt("lastTimeMs", lastMs);
         PlayerPrefs.SetInt("lastResult", won ? 1 : 0);
 
-        int best = PlayerPrefs.GetInt("highScore", 0);
-        if (Score > best) PlayerPrefs.SetInt("highScore", Score);
+        // best time: LOWER is better (only update on win)
+        int bestMs = PlayerPrefs.GetInt("bestTimeMs", int.MaxValue);
+        if (won && lastMs < bestMs) PlayerPrefs.SetInt("bestTimeMs", lastMs);
 
         PlayerPrefs.Save();
     }

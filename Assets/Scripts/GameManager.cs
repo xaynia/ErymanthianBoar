@@ -183,7 +183,9 @@ public class GameManager : MonoBehaviour
         if (isLoading) return;
         isLoading = true;
         
+        ScoreManager.Instance?.StopRun();
         ScoreManager.Instance?.SaveLastRunAndHighScore(true);
+        
         if (ScoreManager.Instance) ScoreManager.Instance.nextMenuReason = MenuReason.Victory;
         
         SceneManager.LoadScene(winScene);
@@ -194,7 +196,9 @@ public class GameManager : MonoBehaviour
         if (isLoading) return;
         isLoading = true;
         
+        ScoreManager.Instance?.StopRun();
         ScoreManager.Instance?.SaveLastRunAndHighScore(false);
+        
         if (ScoreManager.Instance) ScoreManager.Instance.nextMenuReason = MenuReason.GameOver;
         
         SceneManager.LoadScene(menuSceneName);

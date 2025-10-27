@@ -16,9 +16,6 @@ public class MenuController : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1f;
-
-        int last = PlayerPrefs.GetInt("lastScore", 0);
-        int best = PlayerPrefs.GetInt("highScore", 0);
         
         var reason = ScoreManager.Instance 
             ? ScoreManager.Instance.nextMenuReason 
@@ -33,7 +30,7 @@ public class MenuController : MonoBehaviour
 
             case MenuReason.GameOver:
                 titleText.text    = "Game Over";
-                controlsText.text = "SPACE: Jump\nLEFT SHIFT/MOUSE: Sprint";
+                controlsText.text = "SPACE: Jump\n LEFT SHIFT/MOUSE: Sprint";
                 break;
 
             case MenuReason.Victory:
@@ -42,13 +39,24 @@ public class MenuController : MonoBehaviour
                 break;
         }
 
-        lastScoreText.text  = $"Last: {last}";
-        highScoreText.text  = $"Best: {best}";
+        int lastMs = PlayerPrefs.GetInt("lastTimeMs", -1);
+        int bestMs = PlayerPrefs.GetInt("bestTimeMs", -1);
+
+        string F(int ms){
+            if (ms < 0) return "--:--.--";
+            int t = ms; int cs = (t/10)%100; t/=1000;
+            int s = t%60; int m = t/60;
+            return $"{m:00}:{s:00}.{cs:00}";
+        }
+
+        lastScoreText.text = $"Last: {F(lastMs)}";
+        highScoreText.text = $"Best: {F(bestMs)}";
+
     }
     
     public void PlayGame()
     {
-        ScoreManager.Instance?.ResetScore();
+        ScoreManager.Instance?.StartRun();
         
         // next time we return to the menu (if player quits early), default to Title
         if (ScoreManager.Instance) ScoreManager.Instance.nextMenuReason = MenuReason.Title;

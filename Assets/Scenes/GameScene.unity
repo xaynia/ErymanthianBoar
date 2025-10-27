@@ -1257,7 +1257,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0025196373, y: 0.018501163}
+  m_Offset: {x: 0.006069392, y: 0.103684574}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1267,7 +1267,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.44958687, y: 1.9629977}
+  m_Size: {x: 0.49927825, y: 1.7926309}
   m_EdgeRadius: 0
 --- !u!95 &660170475
 Animator:
@@ -1337,7 +1337,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 941344605506797352, guid: b34c31741cf384c61ad635ec830d8af2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1987,7 +1987,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -233.9584, y: 0, z: -296.8885, w: -33.50788}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2014,7 +2014,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreHUD
   text: {fileID: 1092492364}
-  format: '{0}'
 --- !u!1 &1171758038
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,6 +2493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc8e568b45534119b688dc4d5e1c6f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
+  countdownStart: 60
   nextMenuReason: 0
 --- !u!4 &1347959034
 Transform:
