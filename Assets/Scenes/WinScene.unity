@@ -248,6 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WinCutscenePlayer
   animator: {fileID: 462007780}
   clip: {fileID: 7400000, guid: 650e80e35c2d54c71b9b2fd6003a831b, type: 2}
+  playbackSpeed: 0.4
   nextSceneName: MenuScene
   holdOnEnd: 0.3
   inputWarmup: 0.25

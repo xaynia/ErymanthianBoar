@@ -557,9 +557,9 @@ MonoBehaviour:
   menuSceneName: MenuScene
   winScene: WinScene
   baseScrollSpeed: 5
-  sprintSpeedMultiplier: 2.25
+  sprintSpeedMultiplier: 2
   distance01: 0.1
-  sprintGainPerSecond: 0.4
+  sprintGainPerSecond: 0.6
   passiveLossPerSecond: 0.12
   knockbackOnHit: 0.25
   winThreshold: 0.85
@@ -569,12 +569,12 @@ MonoBehaviour:
   boarBaseDrainPerSecond: 0.25
   boarPressureDrainPerSecond: 2
   pressureThreshold: 0.7
-  rampDurationSeconds: 45
+  rampDurationSeconds: 50
   spawnMinStart: 1.6
   spawnMinEnd: 0.6
   spawnMaxStart: 2.4
   spawnMaxEnd: 1
-  speedRampDuration: 30
+  speedRampDuration: 50
   speedEndMultiplier: 1.5
   difficultyCurve:
     serializedVersion: 2

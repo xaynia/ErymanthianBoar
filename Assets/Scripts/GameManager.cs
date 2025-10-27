@@ -57,20 +57,22 @@ public class GameManager : MonoBehaviour
     private bool isLoading;
     
     // t rex changes start
-    [Header("T-Rex Steps (optional)")]
-    public int[] speedScoreSteps   = { 10, 20, 35, 55, 80 };
-    public float[] speedStepMults  = { 1.15f, 1.3f, 1.45f, 1.6f, 1.8f };
-
-    float stepMul = 1f;
-
-    void OnEnable()  { ScoreManager.ScoreChanged += OnScoreChanged; }
-    void OnDisable() { ScoreManager.ScoreChanged -= OnScoreChanged; }
-    void OnScoreChanged(int s)
-    {
-        stepMul = 1f;
-        for (int i = 0; i < speedScoreSteps.Length; i++)
-            if (s >= speedScoreSteps[i]) stepMul = speedStepMults[i];
-    }
+    // [Header("T-Rex Steps (optional)")]
+    // public int[] speedScoreSteps   = { 10, 20, 35, 55, 80 };
+    // public float[] speedStepMults  = { 1.15f, 1.3f, 1.45f, 1.6f, 1.8f };
+    //
+    // float stepMul = 1f;
+    //
+    // void OnEnable()  { ScoreManager.ScoreChanged += OnScoreChanged; }
+    // void OnDisable() { ScoreManager.ScoreChanged -= OnScoreChanged; }
+    // void OnScoreChanged(int s)
+    // {
+    //     stepMul = 1f;
+    //     for (int i = 0; i < speedScoreSteps.Length; i++)
+    //         if (s >= speedScoreSteps[i]) stepMul = speedStepMults[i];
+    // }
+    
+    // HIDE EVEN IF YOU ENABLE T REX
     // public float ScrollSpeed =>
     //     baseScrollSpeed * stepMul * SpeedMul01 * (isSprinting ? sprintSpeedMultiplier : 1f);
     // t rex changes end
